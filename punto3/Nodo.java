@@ -4,6 +4,12 @@ public class Nodo<T> {
 
     private T valorNodo;
     private Nodo<T> siguienteNodo;
+    public Nodo siguiente;
+    public String titulo;
+    public String url;
+    public Object anterior;
+    public String turno;
+    public String cliente;
 
     public Nodo(T valorNodo) {
         this.valorNodo = valorNodo;
