@@ -1,87 +1,50 @@
-class ListaTurnos {
-    private Nodo cabeza;
-    private Nodo cola;
-    private int contador;
-
-    public ListaTurnos() {
-        cabeza = null;
-        cola = null;
-        contador = 0;
+import java.util.Iterator;
+ 
+public class ListaTurnos<T> implements Iterable<T> {
+ 
+    private Nodo<T> head;
+    private Nodo<T> tail;
+    private int size;
+ 
+    public ListaTurnos() { head = null; tail = null; size = 0; }
+ 
+    // Agregar al final — O(1)
+    public void addLast(T value) {
+        Nodo<T> nuevo = new Nodo<>(value);
+        if (tail == null) { head = nuevo; tail = nuevo; }
+        else { tail.setNext(nuevo); tail = nuevo; }
+        size++;
     }
-
-    // Registra un nuevo cliente al final de la fila
-    public void agregar(String nombreCliente) {
-        contador++;
-        Nodo nuevo = new Nodo(nombreCliente);
-
-        if (cola == null) {
-            cabeza = nuevo;
-            cola = nuevo;
-        } else {
-            cola.siguiente = nuevo;
-            cola = nuevo;
-        }
-        System.out.println(" Cliente registrado: " + nombreCliente
-                + " | Turno #" + contador);
+ 
+    // Eliminar primero — O(1)
+    public void removeFirst() {
+        if (head == null) throw new RuntimeException("Lista vacía");
+        head = head.getNext();
+        if (head == null) tail = null;
+        size--;
     }
-
-    // Atiende (elimina) al primer cliente de la fila
-    public void atenderSiguiente() {
-        if (cabeza == null) {
-            System.out.println(" No hay clientes en espera.");
-            return;
-        }
-        System.out.println(" Atendiendo: " + cabeza.cliente
-                + " | Turno #" + cabeza.turno);
-        cabeza = cabeza.siguiente;
-        if (cabeza == null) {
-            cola = null;
-        }
-    }
-
-    // Consulta si un cliente está en la fila (por nombre)
-    public void buscar(String nombreCliente) {
-        Nodo actual = cabeza;
-        int pos = 1;
+ 
+    // Buscar por toString — O(n)
+    public Nodo<T> search(String valor) {
+        Nodo<T> actual = head;
         while (actual != null) {
-            if (actual.cliente.equalsIgnoreCase(nombreCliente)) {
-                System.out.println(" Cliente encontrado: " + actual.cliente
-                        + " | Turno #" + actual.turno
-                        + " | Posición en fila: " + pos);
-                return;
-            }
-            actual = actual.siguiente;
-            pos++;
+            if (actual.getNodeValue().toString().contains(valor)) return actual;
+            actual = actual.getNext();
         }
-        System.out.println(" Cliente '" + nombreCliente + "' no está en la fila.");
+        return null;
     }
-
-    // Consulta quién es el próximo sin eliminarlo
-    public void verSiguiente() {
-        if (cabeza == null) {
-            System.out.println(" La fila está vacía.");
-        } else {
-            System.out.println(" Siguiente en ser atendido: " + cabeza.cliente
-                    + "  Turno #" + cabeza.turno);
-        }
+ 
+    public Nodo<T> getFirstNode() { return head; }
+    public boolean isEmpty()       { return head == null; }
+    public int getSize()           { return size; }
+ 
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            Nodo<T> actual = head;
+            public boolean hasNext() { return actual != null; }
+            public T next() { T v = (T) actual.getNodeValue(); actual = actual.getNext(); return v; }
+        };
     }
-
-    // Muestra toda la fila de espera
-    public void mostrar() {
-        if (cabeza == null) {
-            System.out.println("La fila está vacía.");
-            return;
-        }
-        System.out.println(" Fila de turnos actual");
-        Nodo actual = cabeza;
-        int pos = 1;
-        while (actual != null) {
-            System.out.println("  " + pos + ". " + actual.cliente
-                    + " (Turno #" + actual.turno + ")");
-            actual = actual.siguiente;
-            pos++;
-        }
-
-    }
-
 }
+

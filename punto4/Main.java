@@ -1,37 +1,30 @@
-
-
-public class Main {
-
+public class Main{
     public static void main(String[] args) {
-
-        ListaJuego<String> juego = new ListaJuego<>();
-
-        // AGREGAR jugadores
-        juego.agregar("Jugador 1");
-        juego.agregar("Jugador 2");
-        juego.agregar("Jugador 3");
-
-        System.out.println("Jugadores:");
-        juego.mostrar();
-
-        // TURNOS
-        System.out.println("\nSiguiente turno:");
-        System.out.println(juego.siguiente());
-
-        System.out.println("Siguiente turno:");
-        System.out.println(juego.siguiente());
-
-        System.out.println("Turno anterior:");
-        System.out.println(juego.anterior());
-
-        // ELIMINAR
-        System.out.println("\nEliminar Jugador 2");
-        juego.eliminar("Jugador 2");
-
-        juego.mostrar();
-
-        // BUSCAR
-        System.out.println("\nBuscar Jugador 3:");
-        System.out.println(juego.buscar("Jugador 3"));
+ 
+        SistemaJuego juego = new SistemaJuego();
+ 
+        juego.registrarJugador("Ana");
+        juego.registrarJugador("Luis");
+        juego.registrarJugador("María");
+        juego.registrarJugador("Carlos");
+ 
+        juego.mostrarMesa();
+        juego.mostrarTurnoActual();
+        juego.siguienteTurno();
+        juego.siguienteTurno();
+        juego.jugadorAnterior();
+        juego.siguienteTurno();
+        juego.siguienteTurno();
+        juego.siguienteTurno(); // vuelve a Ana
+ 
+        juego.expulsarActual(); // expulsa al que tiene el turno
+        juego.mostrarMesa();
+        juego.siguienteTurno();
+        juego.siguienteTurno();
+        juego.siguienteTurno(); // cicla entre los 3 restantes
+ 
+        juego.buscar("María");
+        juego.buscar("Carlos");
     }
 }
+

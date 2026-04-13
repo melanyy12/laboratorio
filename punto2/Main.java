@@ -1,38 +1,23 @@
 public class Main {
     public static void main(String[] args) {
-
-        Historial nav = new Historial();
-
-        nav.visitar("https://google.com",    "Google");
-        nav.visitar("https://github.com",    "GitHub");
-        nav.visitar("https://docs.java.com", "Java Docs");
-        nav.visitar("https://stackoverflow.com", "Stack Overflow");
-
-        System.out.println();
-        nav.mostrar();
-
-        System.out.println();
-        nav.retroceder();   
-        nav.retroceder();   
-
-        System.out.println();
-        nav.paginaActual(); 
-
-        System.out.println();
-        nav.avanzar();      
-
-        System.out.println();
-        // Visitar nueva página: elimina Stack Overflow del historial futuro
-        nav.visitar("https://wikipedia.org", "Wikipedia");
-
-        System.out.println();
-        nav.mostrar();      
-
-        System.out.println();
-        nav.avanzar();      
-
-        System.out.println();
-        nav.buscar("https://github.com");
-        nav.buscar("https://stackoverflow.com"); 
+ 
+        SistemaHistorial nav = new SistemaHistorial();
+ 
+        nav.visitarPagina("https://google.com",    "Google");
+        nav.visitarPagina("https://github.com",    "GitHub");
+        nav.visitarPagina("https://docs.java.com", "Java Docs");
+        nav.visitarPagina("https://stackoverflow.com", "Stack Overflow");
+ 
+        nav.mostrarHistorial();
+        nav.retroceder();
+        nav.retroceder();
+        nav.mostrarActual();
+        nav.avanzar();
+        nav.visitarPagina("https://wikipedia.org", "Wikipedia");
+        nav.mostrarHistorial();
+        nav.avanzar();
+        nav.buscar("github.com");
+        nav.buscar("stackoverflow.com");
     }
 }
+

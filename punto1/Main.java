@@ -1,34 +1,21 @@
 public class Main {
     public static void main(String[] args) {
-
-        ListaTurnos fila = new ListaTurnos();
-
-        // Registrar clientes
-        fila.agregar("Ana García");
-        fila.agregar("Luis Pérez");
-        fila.agregar("María López");
-        fila.agregar("Carlos Ruiz");
-
-        System.out.println();
-        fila.mostrar();
-
-        System.out.println();
-        fila.verSiguiente();          
-
-        System.out.println();
-        fila.atenderSiguiente();       
-
-        System.out.println();
-        fila.mostrar();                
-
-        System.out.println();
-        fila.buscar("María López");    
-        fila.buscar("Pedro Jiménez"); 
-
-        System.out.println();
-        fila.atenderSiguiente();       
-        fila.atenderSiguiente();       
-        fila.atenderSiguiente();       
-        fila.atenderSiguiente();       
+ 
+        SistemaPanaderia sistema = new SistemaPanaderia();
+ 
+        sistema.registerClient("Ana García");
+        sistema.registerClient("Luis Pérez");
+        sistema.registerClient("María López");
+        sistema.registerClient("Carlos Ruiz");
+ 
+        sistema.showClients();
+        sistema.showNextClient();
+        sistema.attendClient();
+        sistema.showClients();
+        sistema.attendClient();
+        sistema.attendClient();
+        sistema.attendClient();
+        sistema.attendClient(); // fila vacía
     }
 }
+
